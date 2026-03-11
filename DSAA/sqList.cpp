@@ -71,3 +71,4 @@ void ListDelete_Sq(SqList &L,int i,int &e){
     }
     L.length--;
 }//删除元素 
+
