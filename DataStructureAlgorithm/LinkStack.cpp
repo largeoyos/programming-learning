@@ -1,36 +1,41 @@
 #include "LinkStack.h"
-
-void InitStack_L(LinkStack &S){
-    S=NULL;
+template <typename T>
+void InitStack_L(LinkStack<T> &S){
+    S.list=NULL;
 }//初始化链栈
 
-void DestroyStack_L(LinkStack &S){
-    while(S){
-        LinkList p=S;
-        S=S->next;
+template <typename T>
+void DestroyStack_L(LinkStack<T> &S){
+    while(S.list){
+        LinkList<T> p=S.list;
+        S.list=S.list->next;
         delete p;
     }
 }//销毁链栈
 
-bool GetTop_L(LinkStack S,int &e){
-    if(S==NULL) return 0;
-    e=S->data;
+template <typename T>
+bool GetTop_L(LinkStack<T> S,T &e){
+    if(S.list==NULL) return 0;
+    e=S.list->data;
     return 1;
 }//取栈顶元素
 
-void Push_L(LinkStack &S,int e){
-    LinkList p=new LNode;
+template <typename T>
+void Push_L(LinkStack<T> &S,T e){
+    LinkList<T> p=new LNode<T>;
     p->data=e;
-    p->next=S;
-    S=p;
+    p->next=S.list;
+    S.list=p;
 }//入栈
 
-bool Pop_L(LinkStack &S,int &e){
-    if(S==NULL) return 0;
-    LinkList p=S;
+template <typename T>
+bool Pop_L(LinkStack<T> &S,T &e){
+    if(S.list==NULL) return 0;
+    LinkList<T> p=S.list;
     e=p->data;
-    S=S->next;
+    S.list=S.list->next;
     delete p;
     return 1;
 }//出栈
+
 

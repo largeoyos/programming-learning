@@ -1,6 +1,6 @@
 #include "sqList.h"
 
-static void Increment(SqList &L){
+static void Increment(SqList<int> &L){
     int *newbase=new int[L.listsize+LIST_INC_SIZE];
     if(!newbase){
         ErrorMsg("内存分配失败\n");
@@ -12,32 +12,34 @@ static void Increment(SqList &L){
     L.listsize+=LIST_INC_SIZE;
 }//增加顺序表的存储空间
 
-void InitList_Sq(SqList &L,int msize=LIST_INIT_SIZE){
+void InitList_Sq(SqList<int> &L,int msize=LIST_INIT_SIZE){
     L.elem=new int[msize];
     L.listsize=msize;
     L.length=0;
 }//初始化顺序表
-void DestroyList_Sq(SqList &L){
+void DestroyList_Sq(SqList<int> &L){
     delete []L.elem;
     L.length=0;
     L.listsize=0;
 }//销毁顺序表
-bool ListEmpty_Sq(SqList L){
+bool ListEmpty_Sq(SqList<int> L){
     return L.length==0;
 }//判断顺序表是否为空
-bool ListFull_Sq(SqList L){
+bool ListFull_Sq(SqList<int> L){
     return L.length==L.listsize;
 }//判断顺序表是否已满
-int ListLength_Sq(SqList L){
+int ListLength_Sq(SqList<int> L){
     return L.length;
 }//求顺序表长度
-int LocateItem_Sq(SqList L,int e){
+template <typename T>
+int LocateItem_Sq(SqList<T> L,T e){
     for(int i=0;i<L.length;i++){
         if(L.elem[i]==e) return i+1;
     }
     return 0;
 }//按值查找
-int GetItem_Sq(SqList L,int i,int &e){
+template <typename T>
+int GetItem_Sq(SqList<T> L,int i,T &e){
     if(i<1||i>L.length) return 0;
     e=L.elem[i-1];
     return 1;
@@ -46,7 +48,8 @@ int GetItem_Sq(SqList L,int i,int &e){
 void ErrorMsg(const char *msg){
     printf("%s",msg);
 }//错误提示
-void ListInsert_Sq(SqList &L,int i,int e){
+template <typename T>
+void ListInsert_Sq(SqList<T> &L,int i,T e){
     if(i<1||i>L.length+1){
         ErrorMsg("插入位置不合法\n");
         return;
@@ -57,10 +60,11 @@ void ListInsert_Sq(SqList &L,int i,int e){
     for(int j=L.length-1;j>=i-1;j--){
         L.elem[j+1]=L.elem[j];
     }
-    L.elem[i-1]=e;
+    L.elem[i-1]=eTT
     L.length++;
 }//插入元素
-void ListDelete_Sq(SqList &L,int i,int &e){
+template <typename T>   
+void ListDelete_Sq(SqList<T> &L,int i,T &e){
     if(i<1||i>L.length){
         ErrorMsg("删除位置不合法\n");
         return;
@@ -70,5 +74,8 @@ void ListDelete_Sq(SqList &L,int i,int &e){
         L.elem[j-1]=L.elem[j];
     }
     L.length--;
-}//删除元素 
+}//删除元素
+
+
+
 
