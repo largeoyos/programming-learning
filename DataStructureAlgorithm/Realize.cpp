@@ -134,3 +134,37 @@ int calculate(char suffix[]){
     return result;
 
 }
+
+//algorithm 3.27
+void yanghui(int n){
+    LinkQueue<int> Q;
+    InitQueue_L(Q);
+    EnQueue_L(Q,0);
+    EnQueue_L(Q,1);
+    EnQueue_L(Q,1);
+    int k=1;
+    int s,e;
+    while(k<n){
+        for(int i=1;i<=n-k;i++){
+            std::cout<<' ';
+        }
+        EnQueue_L(Q,0);
+        do{
+            DeQueue_L(Q,s);
+            GetHead_L(Q,e);
+            if(e){
+                std::cout<<e<<" ";
+            }
+            else{
+                std::cout<<std::endl;
+            }
+            EnQueue_L(Q,s+e);
+        }while(e!=0);
+        k++;
+    }   
+    DeQueue_L(Q,e);
+    while(!QueueEmpty_L(Q)){
+        DeQueue_L(Q,e);        
+        std::cout<<e<<" ";
+    }
+}
