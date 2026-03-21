@@ -97,6 +97,8 @@ int operate(int a,char ch,int b){
         case '-':return a-b;
         case '*':return a*b;
         case '/':return a/b;
+        default:
+            return 0;
     }
 }//计算a和b的运算结果
 

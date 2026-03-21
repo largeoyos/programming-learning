@@ -16,7 +16,7 @@ void DestroyQueue_L(LinkQueue<T> &Q){
 }//销毁链队列
 
 template <typename T>
-void GetHead_L(LinkQueue<T> Q,T &e){
+bool GetHead_L(LinkQueue<T> Q,T &e){
     if(Q.front==Q.rear){
         return false;
     }
@@ -34,7 +34,7 @@ void EnQueue_L(LinkQueue<T> &Q,T e){
 }//入队
 
 template <typename T>
-void DeQueue_L(LinkQueue<T> &Q,T &e){
+bool DeQueue_L(LinkQueue<T> &Q,T &e){
     if(Q.front==Q.rear){
         return false;
     }

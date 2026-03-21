@@ -163,12 +163,13 @@ bool matchToString(char str[]){
                 break;
         }
         p++;
-        if(flag==1&&StackEmpty_Sq(S)){
-            return 1;
-        }
-        else 
-            return 0;
+
     }
+    if(flag==1&&StackEmpty_Sq(S)){
+        return 1;
+    }
+    else 
+        return 0;
     
 }
 

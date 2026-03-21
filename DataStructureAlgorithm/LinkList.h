@@ -38,6 +38,6 @@ void Union1_L(LinkList<T> &La,LinkList<T> Lb);
 
 
 
-
+#include "LinkList.cpp"
 #endif // LINKLIST_H
 

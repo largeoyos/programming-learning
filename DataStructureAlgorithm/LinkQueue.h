@@ -17,13 +17,13 @@ template <typename T>
 void DestroyQueue_L(LinkQueue<T> &Q);
 
 template <typename T>
-void GetHead_L(LinkQueue<T> Q,T &e);
+bool GetHead_L(LinkQueue<T> Q,T &e);
 
 template <typename T>
 void EnQueue_L(LinkQueue<T> &Q,T e);
 
 template <typename T>
-void DeQueue_L(LinkQueue<T> &Q,T &e);
+bool DeQueue_L(LinkQueue<T> &Q,T &e);
 
 template <typename T>
 bool QueueEmpty_L(LinkQueue<T> Q);
@@ -34,5 +34,6 @@ int QueueLength_L(LinkQueue<T> Q);
 template <typename T>
 void QueueTraverse_L(LinkQueue<T> Q);
 
+#include "LinkQueue.cpp"
     
 

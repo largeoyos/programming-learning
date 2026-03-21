@@ -29,5 +29,6 @@ bool Pop_Sq(SqStack<T> &S,T &e);             //出栈
 template <typename T>
 void StackTraverse_Sq(SqStack<T> S);          //遍历顺序栈
 
+#include "SqStack.cpp"
 #endif // STACK_H
 

@@ -1,4 +1,4 @@
-#include "main.h"
+#include "Realize.h"
 
 int main(){
     yanghui(5);

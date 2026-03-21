@@ -60,7 +60,7 @@ void ListInsert_Sq(SqList<T> &L,int i,T e){
     for(int j=L.length-1;j>=i-1;j--){
         L.elem[j+1]=L.elem[j];
     }
-    L.elem[i-1]=eTT
+    L.elem[i-1]=e;
     L.length++;
 }//插入元素
 template <typename T>   

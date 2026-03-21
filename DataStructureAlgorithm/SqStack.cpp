@@ -1,6 +1,6 @@
 #include "SqStack.h"
 template <typename T>
-void InitStack_Sq(SqStack<T> &S,int msize=STACK_INIT_SIZE){
+void InitStack_Sq(SqStack<T> &S,int msize){
     S.elem=new T[msize];
     S.top=-1;
     S.stacksize=msize;

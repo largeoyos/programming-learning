@@ -37,6 +37,6 @@ void ListInsert_Sq(SqList<T> &L,int i,T e);                //插入元素
 template <typename T>
 void ListDelete_Sq(SqList<T> &L,int i,T &e);               //删除元素
 
-
+#include "sqList.cpp"
 #endif // SQLIST_H
 

@@ -17,5 +17,5 @@ void Push_L(LinkStack<T> &S,T e);
 template <typename T>
 bool Pop_L(LinkStack<T> &S,T &e);
 
-
+#include "LinkStack.cpp"
 #endif // LINKSTACK_H
