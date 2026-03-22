@@ -113,29 +113,91 @@ int isoperator(char ch){
 }//判断ch是否为运算符
 
 //algorithm 3.14
+// int calculate(char suffix[]){
+//     char *p=suffix;
+//     SqStack<int> S;
+//     InitStack_Sq(S);
+//     char ch=*p++;
+//     while(ch!='#'){
+//         if(!isoperator(ch)){
+//             Push_Sq(S,ch-'0');
+//         }
+//         else{
+//             int a,b;
+//             Pop_Sq(S,a);
+//             Pop_Sq(S,b);
+//             Push_Sq(S,operate(a,ch,b));
+//         }
+//         ch=*p++;
+//     }
+//     int result;
+//     Pop_Sq(S,result);
+//     DestroyStack_Sq(S);
+//     return result;
+// }//计算后缀表达式suffix的值，suffix以#结尾
 int calculate(char suffix[]){
-    char *p=suffix;
+    char *p==suffix;
     SqStack<int> S;
     InitStack_Sq(S);
-    char ch=*p++;
+    char ch=*p;
+    p++;
+    int a,b;
     while(ch!='#'){
-        if(!isoperator(ch)){
-            Push_Sq(S,ch-'0');
-        }
+        if(!isoperator(ch))
+            Push_Sq(ch-'0');
         else{
-            int a,b;
-            Pop_Sq(S,a);
             Pop_Sq(S,b);
+            Pop_Sq(S,a);
             Push_Sq(S,operate(a,ch,b));
         }
-        ch=*p++;
+        ch=*p;
+        p++;
     }
-    int result;
-    Pop_Sq(S,result);
+    Pop_Sq(S,e);
     DestroyStack_Sq(S);
-    return result;
+    return e;
+}//计算后缀表达式suffix的值,suffix以#结尾 作业3.9
 
+//algorithm3.15 homework3.8
+void getsuffix(char exp[],char suffix[]){
+    char*p=exp;
+    k=0;
+    SqStack<char> S;
+    InitStack_Sq(S);
+    Push_Sq(S,'#');
+    while(!StackEmpty_Sq(S)){
+        ch=*p;
+        p++;
+        if(!isoperator){
+            suffix[k]=ch;
+            k++;
+        }
+        switch(ch){
+            case '(' :
+                Push_Sq(S,ch);
+                break;
+            case ')' :
+                char c;
+                while(Pop_Sq(S,c)&&c!='('){
+                    suffix[k]=c;
+                    k++;
+                    break;
+                }
+            default:
+                while(GetTop_Sq(S,c)&&preop(c,ch)){
+                    suffix[k]=c;
+                    k++;
+                    Pop(S,c);
+                }
+                if(ch!='#')
+                    Push_Sq(S,ch);
+        }
+    }
+    suffix[k]='\0';
+    DestroyStack_Sq(S);
 }
+
+
 
 //algorithm 3.27
 void yanghui(int n){
@@ -170,3 +232,4 @@ void yanghui(int n){
         std::cout<<e<<" ";
     }
 }
+//打印杨辉三角的前n行

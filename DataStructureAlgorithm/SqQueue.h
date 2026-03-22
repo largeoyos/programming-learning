@@ -1,4 +1,3 @@
-#include <iostream>
 
 #define QUEUE_INIT_SIZE 100
 #define QUEUE_INCREMENT 10
