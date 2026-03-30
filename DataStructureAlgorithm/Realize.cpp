@@ -136,7 +136,7 @@ int isoperator(char ch){
 //     return result;
 // }//计算后缀表达式suffix的值，suffix以#结尾
 int calculate(char suffix[]){
-    char *p==suffix;
+    char *p=suffix;
     SqStack<int> S;
     InitStack_Sq(S);
     char ch=*p;
