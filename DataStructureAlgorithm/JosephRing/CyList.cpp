@@ -3,10 +3,27 @@
 #include<iostream>
 
 bool InitCyList(CyList &L){
-    L->next=NULL;
-}
-bool InsertCyList(CyList &L,int position,int password){
+    L->next=L;
+    L->position=0;
+    L->password=0;
 
 }
-bool isCyListEmpty(CyList L);
-int DeleteCyList(CyList &L,int position);
+bool InsertCyList(CyList &L,LNode*Now,int position,int password){
+    Now->next=new LNode;
+    Now=Now->next;
+    Now->position=position;
+    Now->password=password;
+    Now->next=L;
+}
+bool isCyListEmpty(CyList L){
+    if(L->next==L)return 1;
+    else return 0;
+}
+int DeleteCyList(CyList &L,LNode* Now,int position){
+    LNode*p=Now;
+    position=Now->next->position;
+    Now->next=Now->next->next;
+    int e= p->password;
+    delete p;
+    return e;
+}

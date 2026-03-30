@@ -5,7 +5,7 @@ struct LNode{
 };
 using CyList=LNode*;
 bool InitCyList(CyList &L);
-bool InsertCyList(CyList &L,int position,int password);
+bool InsertCyList(CyList &L,LNode*Now,int position,int password);
 bool isCyListEmpty(CyList L);
-int DeleteCyList(CyList &L,int position);
+int DeleteCyList(CyList &L,LNode* Now,int position);//删除Now的下一个节点
 
