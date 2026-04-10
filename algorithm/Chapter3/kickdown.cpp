@@ -2,27 +2,27 @@
 #include<string.h>
 
 
-int upper[105];
-int lower[105];
+char upper[105];
+char lower[105];
 
-int check(int s1[],int s2[]){
+int check(char s1[], char s2[]){
 	int len1=strlen(s1);
 	int len2=strlen(s2);
-	for(int offset=0;offset<len1,offset++){
+	for(int offset=0;offset<len1;offset++){
 		bool ok=true;
-		for(int i=0;i+offset<len1&&s2[i],i++){
-			if(s1[offset+i]+s2[i]==4){
+		for(int i=0;i+offset<len1&&s2[i];i++){
+			if(s1[offset+i]-'0'+s2[i]-'0'==4){
 				ok=false;
 				break;
 			}
 
 		}
 		if(ok==true){
-			return len1+offset>len1?len1+offset:len1;
+			return len2+offset>len1?len2+offset:len1;
 		}
 
 	}
-	return len+len2;
+	return len1+len2;
 }
 
 int main(){
@@ -30,7 +30,7 @@ int main(){
         scanf("%s",lower);
         int len1=check(upper,lower);
         int len2=check(lower,upper);
-        printf("%d",len1<=len2?len1:len2);
+        printf("%d\n",len1<=len2?len1:len2);
     }
     return 0;
 }
