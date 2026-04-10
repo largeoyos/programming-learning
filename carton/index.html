@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>卡坦岛</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="app">
+  <div id="top-bar">
+    <button id="home-btn" class="top-btn">返回主页</button>
+    <div id="room-info">🏝 卡坦岛<br>房间号: <span id="room-id">77</span></div>
+    <button id="quit-btn" class="top-btn">结束游戏</button>
+  </div>
+  <div id="game-container">
+    <div id="board-area">
+      <canvas id="board" width="520" height="560"></canvas>
+    </div>
+    <div id="side-panel">
+      <div class="card">
+        <span class="phase-badge" id="phase-label">准备阶段</span>
+        <div id="players-list"></div>
+      </div>
+      <div class="card">
+        <h3>你的资源</h3>
+        <div class="res-grid" id="my-resources"></div>
+      </div>
+      <div class="card">
+        <h3>骰子 &amp; 行动</h3>
+        <div class="dice-display" id="dice-display">— —</div>
+        <div class="action-btns" id="action-btns"></div>
+      </div>
+      <div class="card">
+        <h3>游戏日志</h3>
+        <div class="log" id="log"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="victory-overlay">
+  <div id="victory-box">
+    <h2 id="victory-title">🏆 胜利！</h2>
+    <p id="victory-sub"></p>
+    <br>
+    <button id="restart-btn" class="btn btn-primary replay-btn">再来一局</button>
+  </div>
+</div>
+
+<script src="game.js" defer></script>
+</body>
+</html>
