@@ -6,15 +6,23 @@ int upper[105];
 int lower[105];
 
 int check(int s1[],int s2[]){
-    int len1=strlen(s1);
-    int len2=strlen(s2);
-    int p1=0;
-    int p2=0;
-    while(p1<len1&&p2<len2&&){
-        if(s1[p1]+s2[p2]<=3){
-            p2++;
-        }
-    }
+	int len1=strlen(s1);
+	int len2=strlen(s2);
+	for(int offset=0;offset<len1,offset++){
+		bool ok=true;
+		for(int i=0;i+offset<len1&&s2[i],i++){
+			if(s1[offset+i]+s2[i]==4){
+				ok=false;
+				break;
+			}
+
+		}
+		if(ok==true){
+			return len1+offset>len1?len1+offset:len1;
+		}
+
+	}
+	return len+len2;
 }
 
 int main(){
