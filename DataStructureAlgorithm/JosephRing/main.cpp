@@ -4,7 +4,7 @@
 #endif
 
 
-#include"CyList.h"
+#include"../library/CyList.h"
 
 int main(){
     CyList Joseph=new LNode;

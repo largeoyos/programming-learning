@@ -112,42 +112,20 @@ int isoperator(char ch){
     }
 }//判断ch是否为运算符
 
-//algorithm 3.14
-// int calculate(char suffix[]){
-//     char *p=suffix;
-//     SqStack<int> S;
-//     InitStack_Sq(S);
-//     char ch=*p++;
-//     while(ch!='#'){
-//         if(!isoperator(ch)){
-//             Push_Sq(S,ch-'0');
-//         }
-//         else{
-//             int a,b;
-//             Pop_Sq(S,a);
-//             Pop_Sq(S,b);
-//             Push_Sq(S,operate(a,ch,b));
-//         }
-//         ch=*p++;
-//     }
-//     int result;
-//     Pop_Sq(S,result);
-//     DestroyStack_Sq(S);
-//     return result;
-// }//计算后缀表达式suffix的值，suffix以#结尾
+//algorithm 3.14 / homework 3.9
 int calculate(char suffix[]){
     char *p=suffix;
     SqStack<int> S;
     InitStack_Sq(S);
     char ch=*p;
     p++;
-    int a,b;
+    int a,b,e;
     while(ch!='#'){
         if(!isoperator(ch))
-            Push_Sq(ch-'0');
+            Push_Sq(S,(int)(ch-'0'));
         else{
-            Pop_Sq(S,b);
-            Pop_Sq(S,a);
+            Pop_Sq(S,b);   // b = 右操作数（后入栈）
+            Pop_Sq(S,a);   // a = 左操作数（先入栈）
             Push_Sq(S,operate(a,ch,b));
         }
         ch=*p;
@@ -156,46 +134,67 @@ int calculate(char suffix[]){
     Pop_Sq(S,e);
     DestroyStack_Sq(S);
     return e;
-}//计算后缀表达式suffix的值,suffix以#结尾 作业3.9
+}//计算后缀表达式suffix的值，suffix以#结尾，仅支持单位数字
 
-//algorithm3.15 homework3.8
+//优先级辅助：返回运算符优先级（数值越大越高）
+static int priority(char op){
+    if(op=='+'||op=='-') return 1;
+    if(op=='*'||op=='/') return 2;
+    return 0;
+}
+//preop：栈顶运算符c的优先级 >= 当前运算符ch，则应先弹出c
+static bool preop(char c,char ch){
+    return priority(c)>=priority(ch);
+}
+
+//algorithm 3.15 / homework 3.8
 void getsuffix(char exp[],char suffix[]){
-    char*p=exp;
-    k=0;
+    char *p=exp;
+    int k=0;
+    char ch,c;
     SqStack<char> S;
     InitStack_Sq(S);
     Push_Sq(S,'#');
-    while(!StackEmpty_Sq(S)){
+    ch=*p;
+    p++;
+    while(ch!='#'){
+        if(!isoperator(ch)&&ch!='('&&ch!=')'){
+            // 操作数直接输出
+            suffix[k++]=ch;
+        } else {
+            switch(ch){
+                case '(':
+                    Push_Sq(S,ch);
+                    break;
+                case ')':
+                    // 弹出直到遇到'('，丢弃'('
+                    while(GetTop_Sq(S,c)&&c!='('){
+                        Pop_Sq(S,c);
+                        suffix[k++]=c;
+                    }
+                    Pop_Sq(S,c); // 弹出并丢弃'('
+                    break;
+                default:
+                    // 当前运算符：弹出所有优先级>=自己的栈内运算符
+                    while(GetTop_Sq(S,c)&&c!='#'&&c!='('&&preop(c,ch)){
+                        Pop_Sq(S,c);
+                        suffix[k++]=c;
+                    }
+                    Push_Sq(S,ch);
+                    break;
+            }
+        }
         ch=*p;
         p++;
-        if(!isoperator){
-            suffix[k]=ch;
-            k++;
-        }
-        switch(ch){
-            case '(' :
-                Push_Sq(S,ch);
-                break;
-            case ')' :
-                char c;
-                while(Pop_Sq(S,c)&&c!='('){
-                    suffix[k]=c;
-                    k++;
-                    break;
-                }
-            default:
-                while(GetTop_Sq(S,c)&&preop(c,ch)){
-                    suffix[k]=c;
-                    k++;
-                    Pop(S,c);
-                }
-                if(ch!='#')
-                    Push_Sq(S,ch);
-        }
+    }
+    // 弹出栈内剩余运算符
+    while(!StackEmpty_Sq(S)){
+        Pop_Sq(S,c);
+        if(c!='#') suffix[k++]=c;
     }
     suffix[k]='\0';
     DestroyStack_Sq(S);
-}
+}//将中缀表达式exp转换为后缀表达式suffix，exp以#结尾
 
 
 
