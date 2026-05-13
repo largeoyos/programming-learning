@@ -1,7 +1,8 @@
 #include "BiTree.h"
 #include <iostream>
-#include <queue>
-#include <stack>
+#include "BiTreeQueue.h"
+#include "BiTreeStack.h"
+
 using namespace std;
 bool InitBiTree(BiTree &T){
     T=nullptr;
@@ -18,7 +19,8 @@ BiTNode* CreateNode(BiTreeElemType e){
 void CreateBiTree(BiTree &T){
     BiTreeElemType ch;
     cin>>ch;
-    if(ch='#'){
+    //又是if(==)写成=了
+    if(ch=='#'){
         T=nullptr;
     }else{
         T=new BiTNode;
@@ -50,64 +52,71 @@ void PostOrder(BiTree T){
 }
 void LevelOrder(BiTree T){
     if(T==nullptr)return;
-    queue<BiTNode*>Q;
-    Q.push(T);
-    while(!Q.empty()){
-        BiTNode *p=Q.front();
-        Q.pop();
+    BiQueue Q;
+    InitQueue_Bi(Q);
+    EnQueue_Bi(Q,T);
+    while(!QueueEmpty_Bi(Q)){
+        BiTNode *p;
+        DeQueue_Bi(Q,p);
         cout<< p->data<<" ";
-        if(p->lchild)Q.push(p->lchild);
-        if(p->rchild)Q.push(p->rchild);
+        if(p->lchild)
+            EnQueue_Bi(Q,p->lchild); 
+        if(p->rchild) 
+            EnQueue_Bi(Q,p->rchild); 
     }
+    DestroyQueue_Bi(Q);
 }
 
 //non-recursive traversal
 void PreOrder_NonRec(BiTree T){
     if(T==nullptr)return;
-    stack<BiTNode*>S;
-    S.push(T);
-    while(!S.empty()){
-        BiTNode*p=S.top();
-        S.pop();
+    BiStack S;
+    InitStack_Bi(S);
+    Push_Bi(S,T);
+    while(!StackEmpty_Bi(S)){
+        BiTNode*p;
+        Pop_Bi(S,p);
         cout<<p->data<< " ";
-        if(p->rchild)S.push(p->rchild);
-        if(p->lchild)S.push(p->lchild);
-        
+        if(p->rchild) Push_Bi(S,p->rchild);
+
+        if(p->lchild) Push_Bi(S,p->lchild);        
     }
 
 }
 void InOrder_NonRec(BiTree T){
-    stack<BiTNode*>S;
+    BiStack S;
+    InitStack_Bi(S);
     BiTNode*p=T;
-    while(p!=nullptr||!S.empty()){
+    while(p!=nullptr||!StackEmpty_Bi(S)){
         if(p!=nullptr){
-            S.push(p);
+            Push_Bi(S,p);
             p=p->lchild;
         }else{
-            p=S.top();
-            S.pop();
+            Pop_Bi(S,p);
             cout<<p->data<< " ";
             p=p->rchild;
         }
     }
 }
 void PostOrder_NonRec(BiTree T){
-    stack<BiTree>S;
+    BiStack S;
+    InitStack_Bi(S);
     BiTree p=T;
     BiTree lastVisted=nullptr;
 
-    while(p!=nullptr||!S.empty()){
+    while(p!=nullptr||!StackEmpty_Bi(S)){
         if(p!=nullptr){
-            S.push(p);
+            Push_Bi(S,p);
             p=p->lchild;
         }else{
-            BiTNode*top=S.top();
+            BiTNode*top;
+            GetTop_Bi(S,top);
             if(top->rchild!=nullptr&&top->rchild!=lastVisted){
                 p=top->rchild;
             }else{
                 cout<<top->data<<" ";
                 lastVisted=top;
-                S.pop();
+                Pop_Bi(S,top);
             }
         }
     }
@@ -116,7 +125,7 @@ void PostOrder_NonRec(BiTree T){
 
 //Common Operation
 int TreeDepth(BiTree T){
-    if(T=nullptr)return 0;
+    if(T==nullptr)return 0;
     int ld=TreeDepth(T->lchild);
     int rd=TreeDepth(T->rchild);
     return(ld>rd?ld:rd)+1;
